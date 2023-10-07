@@ -98,6 +98,21 @@ class serviceEstoque{
         }
         return total
     }
+
+    async pesoTotal(){
+        var data : Data[];
+        data = await readCSV(filePath);
+        if (data.length === 0){
+            return 0
+        }
+        let total = 0;
+        for(var i = 0; i<data.length; i++){
+            if (!isNaN(Number (data[i].Peso))){
+                total += Number(data[i].Peso);
+            }
+        }
+        return total
+    }
 }
 
 

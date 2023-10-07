@@ -35,3 +35,12 @@ export async function calcularValorTotal() {
         console.log(error);
     }
 }
+
+export async function calcularPesoTotal(){
+    try{
+        const valor = await serviceEstoque.pesoTotal()
+        console.log(`O peso total do estoque é ${valor.toFixed(1)}Kg`)
+    }catch(error){
+        console.log(error);
+    }
+}

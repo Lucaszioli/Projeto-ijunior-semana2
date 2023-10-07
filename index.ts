@@ -1,4 +1,4 @@
-import { adicionarProduto, calcularValorTotal, removerProduto } from "./controller/controleEstoque";
+import { adicionarProduto, calcularPesoTotal, calcularValorTotal, removerProduto } from "./controller/controleEstoque";
 import { Data } from "./model/data.interface";
 import {escolha} from "./view/view";
 import { lerEstoque } from "./controller/controleEstoque";
@@ -46,7 +46,8 @@ async function main() {
             case '4':
                 await calcularValorTotal();
                 break;
-            case 5:
+            case '5':
+                await calcularPesoTotal();
                 break
             default:
                 console.log('Opção invalida')
