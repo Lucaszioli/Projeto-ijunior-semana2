@@ -1,4 +1,4 @@
-import { adicionarProduto, removerProduto } from "./controller/controleEstoque";
+import { adicionarProduto, calcularValorTotal, removerProduto } from "./controller/controleEstoque";
 import { Data } from "./model/data.interface";
 import {escolha} from "./view/view";
 import { lerEstoque } from "./controller/controleEstoque";
@@ -34,4 +34,8 @@ if (action == 2){
 
 if (action == 3){
     lerEstoque()
+}
+
+if (action == 4){
+    calcularValorTotal()
 }

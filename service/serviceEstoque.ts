@@ -1,15 +1,20 @@
 import readCSV from "../model/readCSV";
 import writeCSV from "../model/writeCSV";
 import { Data } from "../model/data.interface";
-import { error } from "console";
+import fs from 'fs';
 
-
-
-
+const filePath = './model/estoque.csv'
 
 class serviceEstoque{
     async criar(data: Data){
         console.log(console.log("Adicionando produto"));
+        if (!fs.existsSync(filePath))(
+            fs.writeFile(filePath,'',(err) =>{
+                if (err){
+                    console.log('Ocorreu um erro ao criar o arquivo:',err)
+                }
+            })
+        )
         var data2 : Data[] 
         data2 = await readCSV('./model/estoque.csv') 
         if (data.Peso<0){
@@ -38,7 +43,6 @@ class serviceEstoque{
         
         data2.push(data)
         writeCSV('./model/estoque.csv', data2);
-        console.log("Produto adicionado com sucesso");
     }
 
     async ler(){
@@ -62,6 +66,21 @@ class serviceEstoque{
                 throw new Error('Digite um produto que existe no estoque')
             }
         }
+    }
+    
+    async valorTotal(){
+        var data : Data[];
+        data = await readCSV('./model/estoque.csv');
+        if (data.length === 0){
+            return 0 
+        }
+        let total = 0;
+        for(var i = 0; i<data.length; i++){
+            if(!isNaN(Number(Object.values(data[i])[1]))){
+                total += Number(Object.values(data[i])[1]);
+            }
+        }
+        return total
     }
 }
 
