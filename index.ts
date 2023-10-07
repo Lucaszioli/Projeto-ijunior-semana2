@@ -1,8 +1,9 @@
 import { adicionarProduto } from "./controller/controleEstoque";
 import { Data } from "./model/data.interface";
 import escolha from "./view/view";
-
-escolha
+import { lerEstoque } from "./controller/controleEstoque";
+var data : any = []
+lerEstoque()
 console.log("Adicionando produto");
 
 const dados = {
@@ -10,7 +11,6 @@ const dados = {
     title:"bolo de morango",
     value: "10.00",
 }as Data
-
-adicionarProduto(dados);
+adicionarProduto(dados,data);
 
 console.log("Produto adicionado com sucesso")
