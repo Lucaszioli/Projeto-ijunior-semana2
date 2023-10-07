@@ -1,7 +1,8 @@
 import { adicionarProduto } from "./controller/controleEstoque";
 import { Data } from "./model/data.interface";
+import escolha from "./view/view";
 
-
+escolha
 console.log("Adicionando produto");
 
 const dados = {
