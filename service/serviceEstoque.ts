@@ -40,20 +40,26 @@ class serviceEstoque{
         if (isNaN(Number(data.Qntd))){
             throw new Error ("A quantidade de produtos deve ser um número.");
         }
-
-        for(var i=0;i<data2.length;i++){
-            if (Object.values(data2[i]).includes(data.Nome)&& data2[i].Existe == 1){
-                throw new Error("O nome não pode ser repetido");
-            }else if(Object.values(data2[i]).includes(data.Nome)&& data2[i].Existe == 0){
-                data2[i].Existe = 1
-                break
-            }else{
-                data2.push(data)
-                break
+        if (data2.length == 0){
+            writeCSV(filePath, [data]);
+        }else{ 
+            for(var i=0;i<data2.length;i++){
+                if (Object.values(data2[i]).includes(data.Nome)&& Number(data2[i].Existe) == 1){
+                    throw new Error("O nome não pode ser repetido");
+                }else if(Object.values(data2[i]).includes(data.Nome)&& Number(data2[i].Existe) == 0){
+                    data2[i].Valor = data.Valor
+                    data2[i].Qntd = data.Qntd
+                    data2[i].Existe = 1
+                    break
+                }else{
+                    data2.push(data)
+                    break
+                }
             }
+        
+            writeCSV('./model/estoque.csv', data2);
         }
         
-        writeCSV('./model/estoque.csv', data2);
     }
 
     async ler(){
