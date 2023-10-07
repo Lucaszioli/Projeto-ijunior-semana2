@@ -1,6 +1,7 @@
 
 
-export const escolha = '1. Adicionar Item ao Inventário\n\
+export const escolha = '0.Sair\n\
+1. Adicionar Item ao Inventário\n\
 2. Remover Item do Inventário\n\
 3. Listar Itens do Inventário\n\
 4. Ver Valor Total do Inventário\n\

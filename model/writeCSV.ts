@@ -8,7 +8,8 @@ const writeCSV = async (filePath: string, data: Data[]): Promise<void> => {
       { id: 'Nome', title: 'Nome' },
       { id: 'Valor', title: 'Valor' },
       {id: 'Peso', title: 'Peso'},
-      {id: 'Qntd', title: 'Qntd'}
+      {id: 'Qntd', title: 'Qntd'},
+      {id: 'Existe', title: 'Existe'}
     ],
   });
 

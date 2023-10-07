@@ -6,36 +6,52 @@ import {promptnome,promptvalor,promptpeso,promptqntd,} from './view/view'
 import {promptremover} from './view/view'
 const pergunta = require('prompt-sync')()
 
-
-const action = pergunta(escolha)
-
-
-if (action == 1){
-    const nome = pergunta(promptnome);
-    const valor =pergunta(promptvalor);
-    const peso = pergunta(promptpeso);
-    const qntd = pergunta(promptqntd);
-    const dados = {
+var continuar = 1
+async function main() {
+    
+    while (continuar == 1){
+    
+        const action = pergunta(escolha)
+        switch(action){
+            case '0':
+                continuar = 0
+                break
         
-        Nome:nome,
-        Valor:valor,
-        Peso:peso,
-        Qntd:qntd
-    
-    }as Data;
-    
-    adicionarProduto(dados);
+            case '1':
+                const nome = pergunta(promptnome);
+                const valor =pergunta(promptvalor);
+                const peso = pergunta(promptpeso);
+                const qntd = pergunta(promptqntd);
+                const dados = {
+                    
+                    Nome:nome,
+                    Valor:valor,
+                    Peso:peso,
+                    Qntd:qntd,
+                    Existe: 1
+                
+                }as Data;
+                
+                await adicionarProduto(dados);
+                break;
+
+            case '2':
+                const remover = pergunta(promptremover);
+                await removerProduto(remover);
+                break;
+            
+            case '3':
+                await lerEstoque();
+                break;
+            case '4':
+                await calcularValorTotal();
+                break;
+            case 5:
+                break
+            default:
+                console.log('Opção invalida')
+        }    
+    }
 }
 
-if (action == 2){
-    const remover = pergunta(promptremover)
-    removerProduto(remover)
-}
-
-if (action == 3){
-    lerEstoque()
-}
-
-if (action == 4){
-    calcularValorTotal()
-}
+main();

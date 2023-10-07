@@ -20,7 +20,8 @@ export async function removerProduto(data : string){
 
 export async function lerEstoque() {
     try{
-        await serviceEstoque.ler();
+        const ler = await serviceEstoque.ler();
+        console.log(ler)
     }catch(error){
         console.log(error);;
     }

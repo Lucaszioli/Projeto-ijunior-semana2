@@ -16,38 +16,48 @@ class serviceEstoque{
             })
         )
         var data2 : Data[] 
-        data2 = await readCSV('./model/estoque.csv') 
+        data2 = await readCSV('./model/estoque.csv')
         if (data.Peso<0){
             throw new Error ("O peso não pode ser negativo");
         }
+
         if (data.Qntd<=0){
             throw new Error ("A quantidade não pode ser negativa");
         }
+
         if (!isNaN(Number(data.Nome))){
             throw new Error ("O nome do produto deve ser uma palavra.");
         }
+
         if (isNaN(Number(data.Valor))){
             throw new Error ("O valor do produto deve ser um número.");
         }
+
         if (isNaN(Number((data.Peso)))){
             throw new Error ("O peso do produto deve ser um número")
         }
+
         if (isNaN(Number(data.Qntd))){
             throw new Error ("A quantidade de produtos deve ser um número.");
         }
+
         for(var i=0;i<data2.length;i++){
-            if (Object.values(data2[i]).includes(data.Nome)){
+            if (Object.values(data2[i]).includes(data.Nome)&& data2[i].Existe == 1){
                 throw new Error("O nome não pode ser repetido");
+            }else if(Object.values(data2[i]).includes(data.Nome)&& data2[i].Existe == 0){
+                data2[i].Existe = 1
+                break
+            }else{
+                data2.push(data)
+                break
             }
         }
         
-        data2.push(data)
         writeCSV('./model/estoque.csv', data2);
     }
 
     async ler(){
-        const data = await readCSV('./model/estoque.csv');
-        console.log(data);
+        return await readCSV('./model/estoque.csv');
     }
 
     async remover(data : string){
@@ -58,7 +68,7 @@ class serviceEstoque{
         }
         for (var i=0; i<data2.length; i++){
             if (Object.values(data2[i]).includes(data)){
-                data2.splice(i,1)
+                data2[i].Existe = 0
                 writeCSV('./model/estoque.csv', data2);
                 console.log('Produto removido com sucesso');
                 break

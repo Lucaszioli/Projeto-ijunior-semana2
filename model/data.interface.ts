@@ -3,4 +3,5 @@ export interface Data{
     Valor: number;
     Peso: number;
     Qntd: number;
+    Existe: number;
 }
