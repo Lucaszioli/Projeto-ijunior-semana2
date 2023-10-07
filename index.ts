@@ -1,4 +1,4 @@
-import { adicionarProduto, calcularPesoTotal, calcularValorTotal, removerProduto } from "./controller/controleEstoque";
+import { adicionarProduto, calcularPesoTotal, calcularQntdItens, calcularValorTotal, removerProduto } from "./controller/controleEstoque";
 import { Data } from "./model/data.interface";
 import {escolha} from "./view/view";
 import { lerEstoque } from "./controller/controleEstoque";
@@ -33,24 +33,50 @@ async function main() {
                 }as Data;
                 
                 await adicionarProduto(dados);
+                pergunta('Pressione qualquer tecla para continuar');
                 break;
 
             case '2':
                 const remover = pergunta(promptremover);
                 await removerProduto(remover);
+                pergunta('Pressione qualquer tecla para continuar');
                 break;
             
             case '3':
                 await lerEstoque();
+                pergunta('Pressione qualquer tecla para continuar');
                 break;
+            
             case '4':
                 await calcularValorTotal();
+                pergunta('Pressione qualquer tecla para continuar');
                 break;
+            
             case '5':
                 await calcularPesoTotal();
+                pergunta('Pressione qualquer tecla para continuar');
+                break
+            
+            case '6':
+
+                pergunta('Pressione qualquer tecla para continuar');
+                break
+            
+            case '7':
+                pergunta('Pressione qualquer tecla para continuar');
+                break
+
+            case '8':
+                await calcularQntdItens()
+                pergunta('Pressione qualquer tecla para continuar');
+                break
+
+            case '9':
+                pergunta('Pressione qualquer tecla para continuar');
                 break
             default:
                 console.log('Opção invalida')
+                pergunta('Pressione qualquer tecla para continuar');
         }    
     }
 }

@@ -17,14 +17,23 @@ class serviceEstoque{
         )
         var data2 : Data[] 
         data2 = await readCSV('./model/estoque.csv')
-        if (data.Peso<0){
-            throw new Error ("O peso não pode ser negativo");
+        if (data.Nome == ''){
+            throw new Error ('É necessario um nome.');
+        }
+        if (data.Peso<0 || Number(data.Peso) == 0){
+            throw new Error ("O peso não pode ser negativo ou nulo.");
+        }
+        
+        if (data.Valor<0||Number(data.Valor) == 0){
+            throw new Error ("O valor não pode ser negativo ou nulo.");
         }
 
-        if (data.Qntd<=0){
-            throw new Error ("A quantidade não pode ser negativa");
+        if (data.Qntd<=0 || Number(data.Qntd) == 0){
+            throw new Error ("A quantidade não pode ser negativa ou nula.");
         }
-
+        if (!Number.isInteger(Number(data.Qntd))){
+            throw new Error('Número deve ser um inteiro.');
+        }
         if (!isNaN(Number(data.Nome))){
             throw new Error ("O nome do produto deve ser uma palavra.");
         }
@@ -44,19 +53,19 @@ class serviceEstoque{
             writeCSV(filePath, [data]);
         }else{ 
             for(var i=0;i<data2.length;i++){
-                if (Object.values(data2[i]).includes(data.Nome)&& Number(data2[i].Existe) == 1){
+                if (data2[i].Nome == data.Nome && Number(data2[i].Existe) == 1){
                     throw new Error("O nome não pode ser repetido");
-                }else if(Object.values(data2[i]).includes(data.Nome)&& Number(data2[i].Existe) == 0){
+                }else if(data2[i].Nome == data.Nome && Number(data2[i].Existe) == 0){
                     data2[i].Valor = data.Valor
+                    data2[i].Peso = data.Peso
                     data2[i].Qntd = data.Qntd
                     data2[i].Existe = 1
                     break
-                }else{
+                }else if(i == data2.length-1){
                     data2.push(data)
                     break
                 }
             }
-        
             writeCSV('./model/estoque.csv', data2);
         }
         
@@ -75,6 +84,9 @@ class serviceEstoque{
         for (var i=0; i<data2.length; i++){
             if (Object.values(data2[i]).includes(data)){
                 data2[i].Existe = 0
+                data2[i].Peso = 0
+                data2[i].Valor = 0
+                data2[i].Qntd = 0
                 writeCSV('./model/estoque.csv', data2);
                 console.log('Produto removido com sucesso');
                 break
@@ -93,7 +105,7 @@ class serviceEstoque{
         let total = 0;
         for(var i = 0; i<data.length; i++){
             if(!isNaN(Number(Object.values(data[i])[1]))){
-                total += Number(Object.values(data[i])[1]);
+                total += Number(Object.values(data[i])[1])*Number(data[i].Qntd);
             }
         }
         return total
@@ -108,7 +120,20 @@ class serviceEstoque{
         let total = 0;
         for(var i = 0; i<data.length; i++){
             if (!isNaN(Number (data[i].Peso))){
-                total += Number(data[i].Peso);
+                total += Number(data[i].Peso)*Number(data[i].Qntd);
+            }
+        }
+        return total
+    }
+    async qntdItens(){
+        const data:Data[] = await this.ler()
+        if (data.length === 0){
+            return 0 
+        }
+        let total = 0
+        for(var i = 0; i<data.length; i++){
+            if(!isNaN(Number(data[i].Qntd))){
+                total += Number(data[i].Qntd)
             }
         }
         return total

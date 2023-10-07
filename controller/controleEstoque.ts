@@ -44,3 +44,12 @@ export async function calcularPesoTotal(){
         console.log(error);
     }
 }
+
+export async function calcularQntdItens(){
+    try{
+        const qntd = await serviceEstoque.qntdItens()
+        console.log(`Tem ${qntd} itens no estoque`);
+    }catch(error){
+        console.log(error);
+    }
+}
