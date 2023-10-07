@@ -1,17 +1,20 @@
-import { adicionarProduto } from "./controller/controleEstoque";
+import { adicionarProduto, removerProduto } from "./controller/controleEstoque";
 import { Data } from "./model/data.interface";
-import {escolha,promptnome,promptvalor,promptpeso,promptqntd} from "./view/view";
+import {escolha} from "./view/view";
 import { lerEstoque } from "./controller/controleEstoque";
+import {promptnome,promptvalor,promptpeso,promptqntd,} from './view/view'
+import {promptremover} from './view/view'
+const pergunta = require('prompt-sync')()
 
 
-const action = escolha
+const action = pergunta(escolha)
 
 
 if (action == 1){
-    const nome = promptnome;
-    const valor = promptvalor;
-    const peso = promptpeso;
-    const qntd = promptqntd;
+    const nome = pergunta(promptnome);
+    const valor =pergunta(promptvalor);
+    const peso = pergunta(promptpeso);
+    const qntd = pergunta(promptqntd);
     const dados = {
         
         Nome:nome,
@@ -24,6 +27,10 @@ if (action == 1){
     adicionarProduto(dados);
 }
 
+if (action == 2){
+    const remover = pergunta(promptremover)
+    removerProduto(remover)
+}
 
 if (action == 3){
     lerEstoque()

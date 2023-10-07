@@ -16,3 +16,11 @@ export async function lerEstoque() {
         console.log(error);;
     }
 }
+
+export async function removerProduto(data : string){
+    try{
+        await serviceEstoque.remover(data);
+    }catch(error){
+        console.log(error)
+    }
+}
