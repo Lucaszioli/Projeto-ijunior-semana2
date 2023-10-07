@@ -1,5 +1,6 @@
 export interface Data{
-    id : number;
-    title: string;
-    value: string;
+    Nome: string;
+    Valor: number;
+    Peso: number;
+    Qntd: number;
 }
