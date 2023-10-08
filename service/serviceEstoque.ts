@@ -84,8 +84,6 @@ class serviceEstoque{
         for (var i=0; i<data2.length; i++){
             if (Object.values(data2[i]).includes(data)){
                 data2[i].Existe = 0
-                data2[i].Peso = 0
-                data2[i].Valor = 0
                 data2[i].Qntd = 0
                 writeCSV('./model/estoque.csv', data2);
                 console.log('Produto removido com sucesso');
