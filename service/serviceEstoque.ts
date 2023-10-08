@@ -134,7 +134,11 @@ class serviceEstoque{
         if (data.length === 0){
             return 0 
         }
-            return valorTotal/qntd 
+            if(isNaN(valorTotal/qntd)){
+                throw new Error('Não há itens no inventario');
+            }else{
+                return valorTotal/qntd;
+            } 
 }
     async mediaPeso(){
         const data:Data[] = await this.ler()
@@ -143,7 +147,11 @@ class serviceEstoque{
         }
         const pesoTotal = await this.pesoTotal()
         const qntd = await this.qntdItens()
-        return pesoTotal/qntd
+        if(isNaN(pesoTotal/qntd)){
+            throw new Error('Não há itens no estoque');
+        }else{
+            return(pesoTotal/qntd);
+        }
     }    
 
     async qntdItens(){
