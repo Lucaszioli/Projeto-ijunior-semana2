@@ -136,6 +136,15 @@ class serviceEstoque{
         }
             return valorTotal/qntd 
 }
+    async mediaPeso(){
+        const data:Data[] = await this.ler()
+        if (data.length === 0){
+            return 0
+        }
+        const pesoTotal = await this.pesoTotal()
+        const qntd = await this.qntdItens()
+        return pesoTotal/qntd
+    }    
 
     async qntdItens(){
         const data:Data[] = await this.ler()
