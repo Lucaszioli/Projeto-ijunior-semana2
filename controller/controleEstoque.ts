@@ -73,3 +73,12 @@ export async function calcularQntdItens(){
 }
 
 
+export async function totalProdutos() {
+    try{
+        const qntd = await serviceEstoque.qntdProdutos();
+        console.log(`A quantidade total de produtos é ${qntd}`);
+    }catch(error){
+        console.log(error);
+    }
+}
+

@@ -1,4 +1,4 @@
-import { adicionarProduto, calcularMediaPeso, calcularMediaValor, calcularPesoTotal, calcularQntdItens, calcularValorTotal, removerProduto } from "./controller/controleEstoque";
+import { adicionarProduto, calcularMediaPeso, calcularMediaValor, calcularPesoTotal, calcularQntdItens, calcularValorTotal, removerProduto, totalProdutos } from "./controller/controleEstoque";
 import { Data } from "./model/data.interface";
 import {escolha} from "./view/view";
 import { lerEstoque } from "./controller/controleEstoque";
@@ -73,6 +73,7 @@ async function main() {
                 break;
 
             case '9':
+                await totalProdutos();
                 pergunta('Pressione qualquer tecla para continuar');
                 break;
             default:

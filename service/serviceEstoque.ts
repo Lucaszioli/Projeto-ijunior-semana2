@@ -149,7 +149,7 @@ class serviceEstoque{
     async qntdItens(){
         const data:Data[] = await this.ler()
         if (data.length === 0){
-            return 0 
+            return 0;
         }
         let total = 0
         for(var i = 0; i<data.length; i++){
@@ -158,6 +158,20 @@ class serviceEstoque{
             }
         }
         return total
+    }
+
+    async qntdProdutos(){
+        const data:Data[] = await this.ler()
+        if (data.length === 0){
+            return 0;
+        }
+        let total = 0
+        for(var i = 0; i<data.length; i++){
+            if(data[i].Existe == 1){
+                total += 1
+            }
+        }
+        return total;
     }
 }
 
