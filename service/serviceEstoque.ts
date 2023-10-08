@@ -125,6 +125,18 @@ class serviceEstoque{
         }
         return total
     }
+
+    async mediaValor(){
+        const data : Data[] = await this.ler()
+        const valorTotal = await this.valorTotal()
+        const qntd = await this.qntdItens()
+
+        if (data.length === 0){
+            return 0 
+        }
+            return valorTotal/qntd 
+}
+
     async qntdItens(){
         const data:Data[] = await this.ler()
         if (data.length === 0){

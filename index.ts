@@ -1,4 +1,4 @@
-import { adicionarProduto, calcularPesoTotal, calcularQntdItens, calcularValorTotal, removerProduto } from "./controller/controleEstoque";
+import { adicionarProduto, calcularMediaValor, calcularPesoTotal, calcularQntdItens, calcularValorTotal, removerProduto } from "./controller/controleEstoque";
 import { Data } from "./model/data.interface";
 import {escolha} from "./view/view";
 import { lerEstoque } from "./controller/controleEstoque";
@@ -55,25 +55,25 @@ async function main() {
             case '5':
                 await calcularPesoTotal();
                 pergunta('Pressione qualquer tecla para continuar');
-                break
+                break;
             
             case '6':
-
+                await calcularMediaValor();
                 pergunta('Pressione qualquer tecla para continuar');
-                break
+                break;
             
             case '7':
                 pergunta('Pressione qualquer tecla para continuar');
-                break
+                break;
 
             case '8':
                 await calcularQntdItens()
                 pergunta('Pressione qualquer tecla para continuar');
-                break
+                break;
 
             case '9':
                 pergunta('Pressione qualquer tecla para continuar');
-                break
+                break;
             default:
                 console.log('Opção invalida')
                 pergunta('Pressione qualquer tecla para continuar');

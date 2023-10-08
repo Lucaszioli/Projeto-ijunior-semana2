@@ -45,6 +45,15 @@ export async function calcularPesoTotal(){
     }
 }
 
+export async function calcularMediaValor(){
+    try{
+        const valormedio = await serviceEstoque.mediaValor();
+        console.log(`A média de valor dos itens é de R$${valormedio.toFixed(2)}`);
+    }catch(error){
+        console.log(error);
+    }
+}
+
 export async function calcularQntdItens(){
     try{
         const qntd = await serviceEstoque.qntdItens()
@@ -53,3 +62,5 @@ export async function calcularQntdItens(){
         console.log(error);
     }
 }
+
+
